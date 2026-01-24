@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="النقيس نت - بوابة الدخول الآمنة للشبكة">
+<meta name="author" content="Eng. Ehab Tawfiq">
+<title>النقيس نت | بوابة الدخول</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root {
+  --bg1: #050b1a;
+  --bg2: #0b1f3a;
+  --bg3: #102b4d;
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-dark: rgba(0, 0, 0, 0.25);
+  --border: rgba(255, 255, 255, 0.18);
+  --border-light: rgba(255, 255, 255, 0.1);
+  --primary: #00ffd5;
+  --primary-dark: #00ccaa;
+  --accent: #7f5cff;
+  --accent-light: #9d82ff;
+  --text: #ffffff;
+  --text-muted: #a9cbd6;
+  --danger: #ff5f5f;
+  --warning: #f1c40f;
+  --success: #2ecc71;
+  --shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  --shadow-light: 0 15px 40px rgba(0, 0, 0, 0.3);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 20px;
+  --radius-sm: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: 'Cairo', system-ui, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, var(--bg3), var(--bg2), var(--bg1));
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+  padding: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overscroll-behavior: none;
+}
+
+/* إصلاح خلفية الشبكة - إزالة الحركة المفرطة */
+.bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 213, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 92, 255, 0.02) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: 0;
+  pointer-events: none;
+  animation: subtleMove 100s linear infinite;
+}
+
+@keyframes subtleMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* إزالة تأثير الجسيمات المسببة للاهتزاز */
+/* تم إزالة الجسيمات المتحركة واستبدالها بخلفية ثابتة */
+
+/* التطبيق الرئيسي */
+.app {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 450px;
+  min-width: 320px;
+  background: linear-gradient(135deg, var(--glass), var(--glass-dark));
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: visible;
+  animation: pop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  transform-origin: center;
+  transition: var(--transition);
+  margin: 20px auto;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* الهيدر */
+.header {
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* العلامة التجارية */
+.brand {
+  margin: 25px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #071c20;
+  font-weight: 900;
+  font-size: 28px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 14px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.brand::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.tagline {
+  text-align: center;
+  font-size: 13.5px;
+  color: #d6f7ff;
+  margin: -12px 30px 20px;
+  line-height: 1.5;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* الكاردات */
+.card {
+  margin: 20px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.1));
+  border: 1px solid var(--border-light);
+  box-shadow: 
+    var(--shadow-light),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: rgba(0, 255, 213, 0.3);
+  transform: translateY(-2px);
+}
+
+.welcome {
+  text-align: center;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 255, 213, 0.05);
+  border: 1px solid rgba(0, 255, 213, 0.1);
+}
+
+/* الأيقونات */
+.icons {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border: 2px solid var(--border);
+  background: rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.icon::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.icon.facebook i { color: #1877f2; }
+.icon.whatsapp i { color: #25d366; }
+.icon.messenger i { color: #0084ff; }
+.icon.location i { color: #f39c12; }
+
+.icon:hover {
+  transform: translateY(-8px) scale(1.15);
+  border-color: transparent;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.3),
+    0 0 20px var(--primary),
+    0 0 40px rgba(127, 92, 255, 0.4);
+  z-index: 2;
+}
+
+.icon:hover::before {
+  opacity: 1;
+}
+
+.icon:hover i {
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* الحقول */
+.field {
+  margin: 18px 0;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 18px;
+  z-index: 2;
+}
+
+input, select {
+  width: 100%;
+  padding: 16px 20px 16px 50px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  transition: var(--transition);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='%2300ffd5'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 18px center;
+  background-size: 16px;
+  padding-right: 20px;
+}
+
+input::placeholder {
+  color: rgba(168, 211, 219, 0.7);
+  transition: var(--transition);
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 
+    0 0 0 3px rgba(0, 255, 213, 0.2),
+    0 10px 25px rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+input:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* الأزرار */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #041b1f;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(0, 255, 213, 0.5);
+  margin-top: 10px;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.4),
+    0 0 25px var(--primary),
+    0 0 40px rgba(127, 92, 255, 0.5);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  transition: 0.1s;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: 0 5px 20px rgba(0, 255, 213, 0.2);
+}
+
+.btn.secondary:hover {
+  background: rgba(0, 255, 213, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 255, 213, 0.3);
+}
+
+.btn.small {
+  font-size: 14px;
+  padding: 14px 16px;
+  font-weight: 700;
+}
+
+.top-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.top-actions .btn {
+  margin-top: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* معلومات */
+.info {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.info b {
+  color: var(--danger);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(255, 95, 95, 0.3);
+}
+
+.info .success {
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* الفوتر */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #9fbec4;
+  padding: 18px 20px;
+  border-top: 1px solid var(--border-light);
+  background: rgba(0, 0, 0, 0.15);
+  line-height: 1.6;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.footer span {
+  color: var(--warning);
+  font-weight: 600;
+  display: block;
+  margin-top: 5px;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+/* الصفحات */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: relative;
+  min-height: 500px;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* شبكة الأسعار */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.price-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.15));
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.price-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  opacity: 0.7;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(0, 255, 213, 0.2);
+}
+
+.price-card h4 {
+  margin: 8px 0 12px;
+  color: var(--primary);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--primary);
+  text-shadow: 0 2px 10px rgba(0, 255, 213, 0.3);
+  margin: 8px 0;
+  background: linear-gradient(45deg, var(--primary), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.meta {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* التنبيهات - إصلاح الـ position */
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.alert {
+  max-width: 450px;
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid var(--primary);
+  color: var(--text);
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s;
+  pointer-events: auto;
+}
+
+.alert.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* التحميل */
+.loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 11, 26, 0.95);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.loader.active {
+  display: flex;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 255, 213, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  body { 
+    padding: 15px;
+    align-items: flex-start;
+    min-height: 100vh;
+    height: auto;
+  }
+  
+  .app {
+    max-width: 100%;
+    border-radius: 18px;
+    margin: 10px auto;
+  }
+  
+  .brand {
+    font-size: 24px;
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .tagline {
+    font-size: 13px;
+    margin: -10px 20px 15px;
+  }
+  
+  .card {
+    margin: 15px;
+    padding: 20px;
+  }
+  
+  .icon {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  
+  .top-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 15px;
+  }
+  
+  .header {
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand { font-size: 22px; padding: 18px; }
+  .btn { padding: 14px; font-size: 15px; }
+  .price-card { padding: 16px; }
+  .icons { gap: 20px; }
+  .icon { width: 50px; height: 50px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { 
+    animation-duration: 0.01ms !important; 
+    animation-iteration-count: 1 !important; 
+    transition-duration: 0.01ms !important;
+  }
+  .bg-pattern { animation: none !important; }
+}
+
+/* طباعة */
+@media print {
+  body { 
+    background: white !important; 
+    color: black !important; 
+    padding: 0 !important;
+  }
+  .app { 
+    box-shadow: none !important; 
+    border: 1px solid #ddd !important;
+    max-width: 100% !important;
+  }
+  .btn, .icon, .header, .footer span, .bg-pattern, .loader { 
+    display: none !important; 
+  }
+  .card { box-shadow: none !important; border: 1px solid #eee !important; }
+}
+
+/* تحسين التمرير على الهواتف */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover, .icon:hover, .price-card:hover {
+    transform: none !important;
+  }
+  
+  .btn:active, .icon:active {
+    transform: scale(0.98) !important;
+  }
+  
+  input, select, .btn {
+    font-size: 16px; /* منع التكبير التلقائي على iOS */
+  }
+}
+
+/* منع التمرير الزائد */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* تحسين الأداء */
+.will-change {
+  will-change: transform, opacity;
+}
+</style>
+</head>
+<body>
+
+<!-- خلفية ثابتة بدون جسيمات متحركة -->
+<div class="bg-pattern"></div>
+
+<!-- نافذة التنبيه -->
+<div class="alert-container">
+  <div class="alert" id="alert"></div>
+</div>
+
+<!-- شاشة التحميل -->
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+</div>
+
+<div class="app">
+  <div class="header" id="datetime">...</div>
+
+  <!-- الصفحة الرئيسية -->
+  <div id="home" class="page active">
+    <div class="brand">النقيس نت</div>
+    <div class="tagline">شبكة النقيس نت – سرعة مستقرة، تغطية قوية، وخدمة موثوقة على مدار الساعة.</div>
+
+    <div class="card">
+      <div class="welcome">
+        <i class="fas fa-shield-alt"></i> يرجى الحفاظ على كرت الدخول، فالإدارة غير مسؤولة عن ضياعه أو سوء استخدامه.
+      </div>
+
+      <div class="icons">
+        <a class="icon facebook" href="https://facebook.com" target="_blank" aria-label="فيسبوك">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="icon whatsapp" href="https://wa.me/967778172806" target="_blank" aria-label="واتساب">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a class="icon messenger" href="#" aria-label="ماسنجر">
+          <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a class="icon location" href="#" aria-label="الموقع">
+          <i class="fas fa-location-dot"></i>
+        </a>
+      </div>
+
+      <div class="field">
+        <div class="input-wrapper">
+          <div class="input-icon">
+            <i class="fas fa-key"></i>
+          </div>
+          <input id="code" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="أدخل رقم الكرت هنا" autocomplete="off" maxlength="20">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="input-wrapper">
+          <div class="input-icon">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          <select id="speed" aria-label="اختر السرعة">
+            <option value="">السرعة الافتراضية للكرت</option>
+            <option value="2">2 Mbps - سرعة أساسية</option>
+            <option value="5">5 Mbps - سرعة متوسطة</option>
+            <option value="10">10 Mbps - سرعة سريعة</option>
+            <option value="20">20 Mbps - سرعة فائقة</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn small" onclick="login()" aria-label="تسجيل الدخول">
+          <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+        </button>
+        <button class="btn small secondary" onclick="goPrices()" aria-label="عرض الأسعار">
+          <i class="fas fa-tags"></i> أسعار الكروت
+        </button>
+      </div>
+    </div>
+
+    <div class="card info">
+      <i class="fas fa-headset"></i> إدارة النقيس نت للاستفسار: <b>778172806</b><br>
+      <i class="fas fa-code"></i> برمجة المهندس: <b>إيهاب توفيق</b><br>
+      <span class="success"><i class="fas fa-wifi"></i> حالة الشبكة: <b>مستقرة وجاهزة</b></span>
+    </div>
+
+    <div class="footer">
+      Developed & Powered By <b>Eng. Ehab Tawfiq</b> © 2026<br>
+      <span>[جميع الحقوق محفوظة | We are not responsible for any misuse of this app]</span>
+    </div>
+  </div>
+
+  <!-- صفحة الأسعار -->
+  <div id="prices" class="page">
+    <div class="brand">أسعار كروت النقيس نت</div>
+    <div class="tagline">باقات مرنة تناسب الجميع – اختر ما يناسب استخدامك</div>
+
+    <div class="card">
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h4><i class="fas fa-sun"></i> باقة يوم</h4>
+          <div class="price">300 ريال</div>
+          <div class="meta">المدة: 1 يوم<br>الحجم: 500 ميجا<br>السرعة: تصل إلى 20 Mbps</div>
+        </div>
+        <div class="price-card">
+          <h4><i class="fas fa-calendar-day"></i> باقة 3 أيام</h4>
+          <div class="price">700 ريال</div>
+          <div class="meta">المدة: 3 أيام<br>الحجم: 2 جيجا<br>السرعة: تصل إلى 20 Mbps</div>
+        </div>
+        <div class="price-card">
+          <h4><i class="fas fa-calendar-week"></i> باقة أسبوع</h4>
+          <div class="price">1500 ريال</div>
+          <div class="meta">المدة: 7 أيام<br>الحجم: 5 جيجا<br>السرعة: تصل إلى 20 Mbps</div>
+        </div>
+        <div class="price-card">
+          <h4><i class="fas fa-calendar-alt"></i> باقة 15 يوم</h4>
+          <div class="price">3000 ريال</div>
+          <div class="meta">المدة: 15 يوم<br>الحجم: 10 جيجا<br>السرعة: تصل إلى 20 Mbps</div>
+        </div>
+        <div class="price-card">
+          <h4><i class="fas fa-calendar"></i> باقة شهر</h4>
+          <div class="price">5000 ريال</div>
+          <div class="meta">المدة: 30 يوم<br>الحجم: 20 جيجا<br>السرعة: تصل إلى 20 Mbps</div>
+        </div>
+      </div>
+
+      <button class="btn secondary" onclick="goHome()" aria-label="العودة للصفحة الرئيسية">
+        <i class="fas fa-arrow-right"></i> الرجوع إلى الصفحة الرئيسية
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// تحديث الوقت والتاريخ
+function updateTime() {
+  const now = new Date();
+  const days = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+  const months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+  
+  const dayName = days[now.getDay()];
+  const day = now.getDate();
+  const month = months[now.getMonth()];
+  const year = now.getFullYear();
+  const time = now.toLocaleTimeString('ar-EG', { hour12: true });
+  
+  const text = `${dayName} ${day} ${month} ${year} | الساعة الآن ${time}`;
+  document.getElementById("datetime").textContent = text;
+}
+
+// عرض التنبيه
+function showAlert(message, type = 'info') {
+  const alert = document.getElementById('alert');
+  alert.textContent = message;
+  alert.className = 'alert show';
+  
+  if (type === 'error') {
+    alert.style.borderColor = 'var(--danger)';
+    alert.style.boxShadow = '0 15px 40px rgba(255, 95, 95, 0.3)';
+  } else if (type === 'success') {
+    alert.style.borderColor = 'var(--success)';
+    alert.style.boxShadow = '0 15px 40px rgba(46, 204, 113, 0.3)';
+  } else {
+    alert.style.borderColor = 'var(--primary)';
+    alert.style.boxShadow = '0 15px 40px rgba(0, 255, 213, 0.3)';
+  }
+  
+  setTimeout(() => {
+    alert.classList.remove('show');
+  }, 3500);
+}
+
+// تحميل مؤقت
+function showLoader(show) {
+  const loader = document.getElementById('loader');
+  if (show) {
+    loader.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  } else {
+    loader.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// تسجيل الدخول
+function login() {
+  const code = document.getElementById("code").value.trim();
+  const speed = document.getElementById("speed").value;
+  
+  if (!code) {
+    showAlert("⚠️ من فضلك أدخل رقم الكرت", 'error');
+    document.getElementById("code").focus();
+    return;
+  }
+  
+  if (!/^\d+$/.test(code)) {
+    showAlert("❌ رقم الكرت يجب أن يحتوي على أرقام فقط", 'error');
+    return;
+  }
+  
+  if (!speed) {
+    showAlert("⚠️ من فضلك اختر سرعة الاتصال", 'error');
+    return;
+  }
+  
+  showLoader(true);
+  
+  // محاكاة اتصال بالخادم
+  setTimeout(() => {
+    showLoader(false);
+    const speedText = document.querySelector(`#speed option[value="${speed}"]`).text;
+    showAlert(`✅ تم تسجيل الدخول بنجاح!\nرقم الكرت: ${code}\nالسرعة: ${speedText}`, 'success');
+    
+    // تفريغ الحقول بعد النجاح
+    document.getElementById("code").value = '';
+    document.getElementById("speed").selectedIndex = 0;
+    
+    // تسجيل في console للتطوير
+    console.log(`Login attempt - Code: ${code}, Speed: ${speedText}`);
+  }, 1500);
+}
+
+// التنقل بين الصفحات
+function goPrices() {
+  document.getElementById("home").classList.remove("active");
+  setTimeout(() => {
+    document.getElementById("prices").classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showAlert("📋 عرض قائمة الأسعار");
+  }, 50);
+}
+
+function goHome() {
+  document.getElementById("prices").classList.remove("active");
+  setTimeout(() => {
+    document.getElementById("home").classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    showAlert("🏠 العودة للصفحة الرئيسية");
+  }, 50);
+}
+
+// التحقق من الاتصال بالإنترنت
+function checkConnection() {
+  if (!navigator.onLine) {
+    showAlert("⚠️ يبدو أنك غير متصل بالإنترنت. يرجى التحقق من اتصالك.", 'error');
+  }
+}
+
+// تهيئة الأحداث
+document.addEventListener('DOMContentLoaded', function() {
+  updateTime();
+  checkConnection();
+  
+  // تحديث الوقت كل ثانية
+  setInterval(updateTime, 1000);
+  
+  // التحقق من الاتصال عند تغيير الحالة
+  window.addEventListener('online', () => {
+    showAlert("✅ تم استعادة الاتصال بالإنترنت", 'success');
+  });
+  
+  window.addEventListener('offline', () => {
+    showAlert("⚠️ فقدان الاتصال بالإنترنت", 'error');
+  });
+  
+  // إدخال الكود باستخدام Enter
+  document.getElementById("code").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") login();
+  });
+  
+  // تحسين الأداء للهواتف
+  if ('ontouchstart' in window) {
+    document.body.classList.add('touch-device');
+    
+    // تحسين التمرير على الهواتف
+    document.querySelectorAll('.card, .price-card').forEach(el => {
+      el.style.webkitOverflowScrolling = 'touch';
+    });
+  }
+  
+  // منع التمرير الزائد
+  document.addEventListener('touchmove', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+      return;
+    }
+  }, { passive: false });
+});
+
+// إضافة touch-action لمنع التمرير غير المرغوب
+document.addEventListener('DOMContentLoaded', function() {
+  document.documentElement.style.touchAction = 'manipulation';
+});
+
+// خدمة Worker بسيطة للأداء
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(err => {
+      console.log('Service Worker registration failed:', err);
+    });
+  });
+}
+</script>
+
+</body>
+</html>
